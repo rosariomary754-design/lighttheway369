@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lighthouse Project | Anonymous Resources</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="top-nav">
+        <select id="languagePicker" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="zh">中文 (Chinese)</option>
+            <option value="ht">Kreyòl Ayisyen</option>
+        </select>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="lighthouse-icon">🏮</div> 
+            <h1 id="welcome-text">You are safe here.</h1>
+            <p id="privacy-guarantee">We do not track your IP, your name, or your location. Your privacy is our priority.</p>
+        </div>
+    </header>
+
+    <section class="search-container">
+        <div class="search-box">
+            <input type="text" id="locationInput" placeholder="Enter Zip Code or Region...">
+            <button onclick="searchResources()" id="searchBtn">Find Help</button>
+        </div>
+    </section>
+
+    <main class="resource-grid">
+        <div class="card" onclick="showCategory('legal')">
+            <span class="icon">⚖️</span>
+            <h3 id="cat-legal">Legal & Citizenship</h3>
+        </div>
+        <div class="card" onclick="showCategory('food')">
+            <span class="icon">🍎</span>
+            <h3 id="cat-food">Food & Groceries</h3>
+        </div>
+        <div class="card" onclick="showCategory('shelter')">
+            <span class="icon">🏠</span>
+            <h3 id="cat-shelter">Emergency Shelter</h3>
+        </div>
+        <div class="card" onclick="showCategory('education')">
+            <span class="icon">📚</span>
+            <h3 id="cat-edu">Education & ESL</h3>
+        </div>
+        <div class="card" onclick="showCategory('rights')">
+            <span class="icon">🛡️</span>
+            <h3 id="cat-rights">Know Your Rights</h3>
+        </div>
+    </main>
+
+    <section id="resultsArea" class="results-hidden">
+        <button onclick="closeResults()">← Back</button>
+        <div id="resultsContent"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
