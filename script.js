@@ -1,53 +1,77 @@
-const translations = {
+const langData = {
     en: {
-        welcome: "You are safe here.",
-        privacy: "We do not track your IP or personal data.",
+        privacy: "🛡️ Your data is not stored. We do not track IP addresses.",
+        headline: "You are welcome here.",
+        subheadline: "Find food, shelter, and legal aid anonymously.",
+        search: "Find Help",
         legal: "Legal & Citizenship",
-        food: "Food & Groceries",
+        food: "Food Resources",
         rights: "Know Your Rights"
     },
     es: {
-        welcome: "Estás seguro aquí.",
-        privacy: "No rastreamos su IP ni sus datos personales.",
+        privacy: "🛡️ Sus datos no se guardan. No rastreamos direcciones IP.",
+        headline: "Usted es bienvenido aquí.",
+        subheadline: "Encuentre comida, refugio y ayuda legal de forma anónima.",
+        search: "Buscar Ayuda",
         legal: "Legal y Ciudadanía",
-        food: "Comida y Comestibles",
+        food: "Recursos Alimentarios",
         rights: "Conozca sus Derechos"
+    },
+    fr: {
+        privacy: "🛡️ Vos données ne sont pas stockées. Nous ne suivons pas les adresses IP.",
+        headline: "Vous êtes les bienvenus ici.",
+        subheadline: "Trouvez de la nourriture, un abri et une aide juridique anonymement.",
+        search: "Chercher",
+        legal: "Juridique et Citoyenneté",
+        food: "Ressources Alimentaires",
+        rights: "Connaissez Vos Droits"
     }
-    // Add other languages here
 };
 
-function changeLanguage() {
-    const lang = document.getElementById('languagePicker').value;
-    const t = translations[lang] || translations.en;
-    
-    document.getElementById('welcome-text').innerText = t.welcome;
-    document.getElementById('privacy-guarantee').innerText = t.privacy;
-    document.getElementById('cat-legal').innerText = t.legal;
-    document.getElementById('cat-food').innerText = t.food;
-    document.getElementById('cat-rights').innerText = t.rights;
+function updateLanguage() {
+    const lang = document.getElementById('langSelect').value;
+    const content = langData[lang] || langData.en;
+
+    document.getElementById('privacy-stmt').innerText = content.privacy;
+    document.getElementById('headline').innerText = content.headline;
+    document.getElementById('subheadline').innerText = content.subheadline;
+    document.getElementById('searchBtn').innerText = content.search;
+    document.getElementById('cat-legal').innerText = content.legal;
+    document.getElementById('cat-food').innerText = content.food;
+    document.getElementById('cat-rights').innerText = content.rights;
 }
 
-function searchResources() {
-    const zip = document.getElementById('locationInput').value;
-    if(!zip) return alert("Please enter a zip code.");
+function performSearch() {
+    const zip = document.getElementById('zipSearch').value;
+    if (!zip) return alert("Please enter a location");
+    filter('all');
+}
 
-    // Mock Data - In a real app, this would be a local JSON file
-    const mockResults = `
-        <div class="result-item">
-            <h4>Community Food Bank</h4>
-            <p>Address: 123 Hope St, Region ${zip}</p>
-            <p><strong>Status:</strong> Open until 5:00 PM</p>
-            <p><em>No ID Required.</em></p>
-        </div>
-    `;
-    
-    document.querySelector('.resource-grid').style.display = 'none';
-    const resultsArea = document.getElementById('resultsArea');
-    resultsArea.classList.remove('results-hidden');
-    document.getElementById('resultsContent').innerHTML = `<h2>Resources near ${zip}</h2>` + mockResults;
+function filter(category) {
+    const panel = document.getElementById('results-panel');
+    const content = document.getElementById('search-results');
+    panel.classList.remove('hidden');
+
+    // Mock data - in production, this would be a local JSON file
+    const resources = [
+        { name: "Community Kitchen", addr: "123 Hope Ln", hours: "Open until 6 PM", cat: "food" },
+        { name: "Legal Aid Center", addr: "456 Justice Ave", hours: "Appt Only", cat: "legal" }
+    ];
+
+    content.innerHTML = `<h2>Resources for ${category.toUpperCase()}</h2>`;
+    resources.forEach(item => {
+        if (category === 'all' || item.cat === category) {
+            content.innerHTML += `
+                <div class="result-item">
+                    <h4>${item.name}</h4>
+                    <p>📍 ${item.addr}</p>
+                    <p>🕒 <strong>Status:</strong> ${item.hours}</p>
+                </div>
+            `;
+        }
+    });
 }
 
 function closeResults() {
-    document.querySelector('.resource-grid').style.display = 'grid';
-    document.getElementById('resultsArea').classList.add('results-hidden');
+    document.getElementById('results-panel').classList.add('hidden');
 }
