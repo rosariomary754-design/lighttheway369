@@ -3,63 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Lighthouse Project | Anonymous Resources</title>
+    <title>The Lighthouse | Safe Resources</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="top-nav">
-        <select id="languagePicker" onchange="changeLanguage()">
+    <nav class="privacy-bar">
+        <div id="privacy-stmt">🛡️ Your data is not stored. We do not track IP addresses.</div>
+        <select id="langSelect" onchange="updateLanguage()">
             <option value="en">English</option>
             <option value="es">Español</option>
             <option value="fr">Français</option>
-            <option value="zh">中文 (Chinese)</option>
+            <option value="zh">中文</option>
             <option value="ht">Kreyòl Ayisyen</option>
         </select>
     </nav>
 
     <header class="hero">
-        <div class="hero-content">
-            <div class="lighthouse-icon">🏮</div> 
-            <h1 id="welcome-text">You are safe here.</h1>
-            <p id="privacy-guarantee">We do not track your IP, your name, or your location. Your privacy is our priority.</p>
+        <div class="hero-overlay">
+            <div class="lighthouse-container">
+                <span class="lighthouse-img">🏮</span>
+            </div>
+            <h1 id="headline">You are welcome here.</h1>
+            <p id="subheadline">Find food, shelter, and legal aid anonymously.</p>
         </div>
     </header>
 
-    <section class="search-container">
-        <div class="search-box">
-            <input type="text" id="locationInput" placeholder="Enter Zip Code or Region...">
-            <button onclick="searchResources()" id="searchBtn">Find Help</button>
+    <section class="search-section">
+        <div class="search-card">
+            <input type="text" id="zipSearch" placeholder="Enter Zip Code or City...">
+            <button onclick="performSearch()" id="searchBtn">Find Help</button>
         </div>
     </section>
 
-    <main class="resource-grid">
-        <div class="card" onclick="showCategory('legal')">
-            <span class="icon">⚖️</span>
+    <main class="grid-container">
+        <div class="resource-card" onclick="filter('legal')">
+            <span class="card-icon">⚖️</span>
             <h3 id="cat-legal">Legal & Citizenship</h3>
         </div>
-        <div class="card" onclick="showCategory('food')">
-            <span class="icon">🍎</span>
-            <h3 id="cat-food">Food & Groceries</h3>
+        <div class="resource-card" onclick="filter('food')">
+            <span class="card-icon">🍎</span>
+            <h3 id="cat-food">Food Resources</h3>
         </div>
-        <div class="card" onclick="showCategory('shelter')">
-            <span class="icon">🏠</span>
-            <h3 id="cat-shelter">Emergency Shelter</h3>
+        <div class="resource-card" onclick="filter('shelter')">
+            <span class="card-icon">🏠</span>
+            <h3 id="cat-shelter">Shelter</h3>
         </div>
-        <div class="card" onclick="showCategory('education')">
-            <span class="icon">📚</span>
-            <h3 id="cat-edu">Education & ESL</h3>
+        <div class="resource-card" onclick="filter('edu')">
+            <span class="card-icon">📚</span>
+            <h3 id="cat-edu">Education</h3>
         </div>
-        <div class="card" onclick="showCategory('rights')">
-            <span class="icon">🛡️</span>
+        <div class="resource-card" onclick="filter('child')">
+            <span class="card-icon">🧸</span>
+            <h3 id="cat-child">Child Care</h3>
+        </div>
+        <div class="resource-card ky-rights" onclick="filter('rights')">
+            <span class="card-icon">🛡️</span>
             <h3 id="cat-rights">Know Your Rights</h3>
         </div>
     </main>
 
-    <section id="resultsArea" class="results-hidden">
-        <button onclick="closeResults()">← Back</button>
-        <div id="resultsContent"></div>
-    </section>
+    <div id="results-panel" class="hidden">
+        <button onclick="closeResults()" class="close-btn">← Back to categories</button>
+        <div id="search-results"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>
