@@ -3,70 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Lighthouse | Safe Resources</title>
+    <title>The Lighthouse Portal | Safe & Anonymous</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="privacy-bar">
-        <div id="privacy-stmt">🛡️ Your data is not stored. We do not track IP addresses.</div>
-        <select id="langSelect" onchange="updateLanguage()">
+    <div class="privacy-banner">
+        <span class="icon">🛡️</span>
+        <span id="privacy-text">We do not share or sell your personal data. We do not track your location or store your IP address.</span>
+    </div>
+
+    <nav class="top-nav">
+        <div class="logo">The Lighthouse</div>
+        <select id="languagePicker" onchange="changeLanguage()">
             <option value="en">English</option>
             <option value="es">Español</option>
             <option value="fr">Français</option>
-            <option value="zh">中文</option>
-            <option value="ht">Kreyòl Ayisyen</option>
+            <option value="zh">中文 (Chinese - Mandarin)</option>
+            <option value="ht">Kreyòl Ayisyen (Creole)</option>
         </select>
     </nav>
 
     <header class="hero">
-        <div class="hero-overlay">
-            <div class="lighthouse-container">
-                <span class="lighthouse-img">🏮</span>
+        <div class="hero-content">
+            <h1 id="welcome-title">You are safe here.</h1>
+            <p id="welcome-sub">Find local resources anonymously. No names, no tracking.</p>
+            
+            <div class="search-box">
+                <input type="text" id="locationInput" placeholder="Enter Zip Code or Region...">
+                <button onclick="searchResources()" id="search-btn">Find Help</button>
             </div>
-            <h1 id="headline">You are welcome here.</h1>
-            <p id="subheadline">Find food, shelter, and legal aid anonymously.</p>
         </div>
     </header>
 
-    <section class="search-section">
-        <div class="search-card">
-            <input type="text" id="zipSearch" placeholder="Enter Zip Code or City...">
-            <button onclick="performSearch()" id="searchBtn">Find Help</button>
-        </div>
-    </section>
-
-    <main class="grid-container">
-        <div class="resource-card" onclick="filter('legal')">
-            <span class="card-icon">⚖️</span>
-            <h3 id="cat-legal">Legal & Citizenship</h3>
-        </div>
-        <div class="resource-card" onclick="filter('food')">
-            <span class="card-icon">🍎</span>
-            <h3 id="cat-food">Food Resources</h3>
-        </div>
-        <div class="resource-card" onclick="filter('shelter')">
-            <span class="card-icon">🏠</span>
-            <h3 id="cat-shelter">Shelter</h3>
-        </div>
-        <div class="resource-card" onclick="filter('edu')">
-            <span class="card-icon">📚</span>
-            <h3 id="cat-edu">Education</h3>
-        </div>
-        <div class="resource-card" onclick="filter('child')">
-            <span class="card-icon">🧸</span>
-            <h3 id="cat-child">Child Care</h3>
-        </div>
-        <div class="resource-card ky-rights" onclick="filter('rights')">
-            <span class="card-icon">🛡️</span>
-            <h3 id="cat-rights">Know Your Rights</h3>
+    <main class="container">
+        <h2 id="category-title" class="section-title">What do you need help finding today?</h2>
+        <div class="grid">
+            <div class="card" onclick="showCategory('food')">
+                <div class="card-icon">🍎</div>
+                <h3 id="cat-food">Food Resources</h3>
+            </div>
+            <div class="card" onclick="showCategory('shelter')">
+                <div class="card-icon">🏠</div>
+                <h3 id="cat-shelter">Shelter & Housing</h3>
+            </div>
+            <div class="card" onclick="showCategory('legal')">
+                <div class="card-icon">⚖️</div>
+                <h3 id="cat-legal">Legal & Advocacy</h3>
+            </div>
+            <div class="card" onclick="showCategory('education')">
+                <div class="card-icon">📚</div>
+                <h3 id="cat-edu">Education & ESL</h3>
+            </div>
+            <div class="card" onclick="showCategory('childcare')">
+                <div class="card-icon">🧸</div>
+                <h3 id="cat-child">Child Care</h3>
+            </div>
+            <div class="card rights-card" onclick="showCategory('rights')">
+                <div class="card-icon">✋</div>
+                <h3 id="cat-rights">Know Your Rights</h3>
+            </div>
         </div>
     </main>
 
-    <div id="results-panel" class="hidden">
-        <button onclick="closeResults()" class="close-btn">← Back to categories</button>
-        <div id="search-results"></div>
-    </div>
+    <section id="resultsArea" class="hidden container">
+        <button class="back-btn" onclick="closeResults()">← <span id="back-text">Back to categories</span></button>
+        <div id="resultsContent"></div>
+    </section>
 
     <script src="script.js"></script>
 </body>
