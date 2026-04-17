@@ -116,7 +116,7 @@ function changeLanguage() {
     document.getElementById('back-text').innerText = t.back;
 }
 
-// --- 2. Local Database (Updated strictly with your provided links) ---
+// --- 2. Local Database (Updated exactly with provided links) ---
 const resourceDatabase = [
     // Emergency Hotlines
     { category: 'hotlines', name: '211 Network', desc: 'Housing, food, and utilities assistance.', url: 'https://www.211.org/' },
@@ -138,7 +138,7 @@ const resourceDatabase = [
 
     // Find Shelter
     { category: 'shelter', name: 'Catholic Charities USA', desc: 'Find a local agency for emergency housing.', url: 'https://www.catholiccharitiesusa.org/about-us/find-a-local-agency/' },
-    { category: 'shelter', name: 'The Salvation Army', desc: 'Locate emergency shelters and housing support.', url: 'https://www.salvationarmyusa.org' },
+    { category: 'shelter', name: 'The Salvation Army', desc: 'Locate emergency shelters and housing support.', url: 'https://www.salvationarmyusa.org/usn/find-shelter/' },
     { category: 'shelter', name: 'USDA Farm Labor Housing', desc: 'Multifamily housing programs and grants.', url: 'https://www.rd.usda.gov/programs-services/multifamily-housing-programs/farm-labor-housing-direct-loans-grants' },
 
     // Legal Help
@@ -161,7 +161,8 @@ const resourceDatabase = [
     { category: 'childcare', name: 'Child Welfare Information Gateway', desc: 'Resources for child safety and care.', url: 'https://www.childwelfare.gov/' },
 
     // Health
-    { category: 'health', name: 'Medicaid', desc: 'Healthcare coverage information.', url: 'https://www.medicaid.gov/' }
+    { category: 'health', name: 'Medicaid', desc: 'Healthcare coverage information.', url: 'https://www.medicaid.gov/' },
+    { category: 'health', name: 'Legal Aid NYC', desc: 'Health & community legal aid services.', url: 'https://legalaidnyc.org/' }
 ];
 
 // --- 3. UI Functionality ---
@@ -195,6 +196,7 @@ function displayResults(data, heading) {
     if(data.length === 0) {
         html += `<p>No resources found in this category yet.</p>`;
     } else {
+        // Updated to display clickable links instead of addresses
         data.forEach(item => {
             html += `
             <div class="resource-item">
