@@ -52,15 +52,11 @@ select {
 }
 
 .hero {
-    /* * UPDATED to use your local image.
-     * The image is 'hero_lighthouse.jpg' and it will be placed in the same folder.
-     * The warm-blue overlay (linear-gradient) is kept for style and readability.
-     */
-    background: linear-gradient(rgba(74, 144, 226, 0.85), rgba(74, 144, 226, 0.7)), 
-                url('hero_lighthouse.jpg') center/cover;
+    /* Kept the warm-blue gradient for header text readability */
+    background: linear-gradient(rgba(74, 144, 226, 0.9), rgba(74, 144, 226, 0.9));
     color: white;
     text-align: center;
-    padding: 80px 20px;
+    padding: 60px 20px;
 }
 
 .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
@@ -97,6 +93,23 @@ select {
 }
 
 .search-box button:hover { background: #e09612; }
+
+/* Image Container Styles */
+.main-lighthouse-image-container {
+    max-width: 1000px;
+    margin: 40px auto 0;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.main-lighthouse-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: block;
+}
 
 .container {
     max-width: 1000px;
@@ -156,5 +169,14 @@ select {
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.status-open { color: #2E7D32; font-weight: bold; }
-.safe-note { color: var(--warm-gold); font-size: 0.9rem; font-style: italic; }
+.resource-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.resource-link:hover {
+    text-decoration: underline;
+}
