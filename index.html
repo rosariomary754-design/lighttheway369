@@ -1,506 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- No analytics, no tracking pixels, no external data collection -->
-  <title>The Lighthouse — Free Resources for Everyone</title>
-  <meta name="robots" content="noindex, nofollow" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lighthouse Portal | Safe & Anonymous</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- PRIVACY BANNER -->
-  <div class="privacy-banner" id="privacyBanner">
-    <span id="privacyText">🔒 We do not collect, store, or share your information. No login required. No tracking.</span>
-    <button class="close-banner" onclick="closeBanner()" aria-label="Close">✕</button>
-  </div>
-
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="logo">
-        <span class="logo-icon">🏮</span>
-        <span class="logo-text" id="siteTitle">The Lighthouse</span>
-      </div>
-      <nav class="top-nav">
-        <a href="#resources" id="navResources">Resources</a>
-        <a href="#rights" id="navRights">Know Your Rights</a>
-        <a href="#search-section" id="navFind">Find Near Me</a>
-        <div class="lang-selector">
-          <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()" aria-label="Select Language">🌐 <span id="currentLang">English</span> ▾</button>
-          <div class="lang-menu" id="langMenu">
-            <button onclick="setLanguage('en')">English</button>
-            <button onclick="setLanguage('es')">Español</button>
-            <button onclick="setLanguage('fr')">Français</button>
-            <button onclick="setLanguage('zh')">中文 (Chinese)</button>
-            <button onclick="setLanguage('ht')">Kreyòl Ayisyen</button>
-            <button onclick="setLanguage('pt')">Português</button>
-            <button onclick="setLanguage('ar')">العربية</button>
-            <button onclick="setLanguage('vi')">Tiếng Việt</button>
-            <button onclick="setLanguage('ko')">한국어</button>
-            <button onclick="setLanguage('ru')">Русский</button>
-          </div>
-        </div>
-      </nav>
+    <div class="privacy-banner">
+        <span class="icon">🛡️</span>
+        <span id="privacy-text">We do not share or sell your personal data. We do not track your location or store your IP address.</span>
     </div>
-  </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero" id="hero">
-    <div class="lighthouse-scene">
-      <!-- SVG Lighthouse Illustration -->
-      <svg class="lighthouse-svg" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Sky gradient -->
-        <defs>
-          <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#0f2744;stop-opacity:1" />
-            <stop offset="60%" style="stop-color:#1a4a7a;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#2d6fa5;stop-opacity:1" />
-          </linearGradient>
-          <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#1a5276;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#0d2137;stop-opacity:1" />
-          </linearGradient>
-          <radialGradient id="beamGrad" cx="50%" cy="0%" r="100%">
-            <stop offset="0%" style="stop-color:#f9e07a;stop-opacity:0.85" />
-            <stop offset="100%" style="stop-color:#f9e07a;stop-opacity:0" />
-          </radialGradient>
-          <linearGradient id="towerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style="stop-color:#c0392b" />
-            <stop offset="40%" style="stop-color:#e8d5c0" />
-            <stop offset="100%" style="stop-color:#c0392b" />
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-        <!-- Sky -->
-        <rect width="900" height="600" fill="url(#skyGrad)" />
-        <!-- Stars -->
-        <circle cx="80" cy="50" r="1.5" fill="white" opacity="0.8"/>
-        <circle cx="200" cy="30" r="1" fill="white" opacity="0.6"/>
-        <circle cx="320" cy="70" r="1.5" fill="white" opacity="0.9"/>
-        <circle cx="450" cy="20" r="1" fill="white" opacity="0.7"/>
-        <circle cx="600" cy="55" r="1.5" fill="white" opacity="0.8"/>
-        <circle cx="720" cy="35" r="1" fill="white" opacity="0.6"/>
-        <circle cx="830" cy="65" r="1.5" fill="white" opacity="0.9"/>
-        <circle cx="150" cy="90" r="1" fill="white" opacity="0.5"/>
-        <circle cx="680" cy="88" r="1" fill="white" opacity="0.7"/>
-        <!-- Light beam -->
-        <polygon points="450,160 180,420 720,420" fill="url(#beamGrad)" opacity="0.4" class="beam-anim"/>
-        <!-- Water -->
-        <ellipse cx="450" cy="480" rx="500" ry="80" fill="url(#waterGrad)" />
-        <rect x="0" y="480" width="900" height="120" fill="url(#waterGrad)" />
-        <!-- Water shimmer -->
-        <ellipse cx="380" cy="495" rx="60" ry="8" fill="#f9e07a" opacity="0.08"/>
-        <ellipse cx="520" cy="510" rx="40" ry="5" fill="#f9e07a" opacity="0.06"/>
-        <!-- Rocks/cliffs -->
-        <ellipse cx="450" cy="445" rx="120" ry="30" fill="#1a2a3a"/>
-        <polygon points="330,445 390,395 450,445" fill="#1e3a4a"/>
-        <polygon points="450,445 510,390 570,445" fill="#162535"/>
-        <!-- Lighthouse tower -->
-        <polygon points="430,180 470,180 460,430 440,430" fill="url(#towerGrad)"/>
-        <!-- Red stripes -->
-        <polygon points="430,200 470,200 469,215 431,215" fill="#c0392b" opacity="0.9"/>
-        <polygon points="432,240 468,240 467,255 433,255" fill="#c0392b" opacity="0.9"/>
-        <polygon points="433,280 467,280 466,295 434,295" fill="#c0392b" opacity="0.9"/>
-        <polygon points="434,320 466,320 465,335 435,335" fill="#c0392b" opacity="0.9"/>
-        <polygon points="435,360 465,360 464,375 436,375" fill="#c0392b" opacity="0.9"/>
-        <!-- Lighthouse top platform -->
-        <rect x="420" y="170" width="60" height="8" rx="2" fill="#95a5a6"/>
-        <!-- Lighthouse lantern room -->
-        <rect x="428" y="135" width="44" height="38" rx="4" fill="#2c3e50"/>
-        <rect x="432" y="140" width="36" height="28" rx="3" fill="#f9e07a" opacity="0.95" filter="url(#glow)" class="lantern-pulse"/>
-        <!-- Light top -->
-        <polygon points="428,135 450,108 472,135" fill="#7f8c8d"/>
-        <rect x="446" y="105" width="8" height="10" fill="#95a5a6"/>
-        <!-- Lighthouse base building -->
-        <rect x="415" y="430" width="70" height="40" rx="3" fill="#d5c9b8"/>
-        <rect x="435" y="440" width="15" height="25" rx="2" fill="#2c3e50"/>
-        <!-- Foliage -->
-        <ellipse cx="370" cy="435" rx="30" ry="15" fill="#1e4620"/>
-        <ellipse cx="530" cy="435" rx="28" ry="14" fill="#1e4620"/>
-        <!-- Water reflections / waves -->
-        <path d="M100,500 Q200,490 300,500 Q400,510 500,500 Q600,490 700,500 Q800,510 900,500" stroke="#2980b9" stroke-width="2" fill="none" opacity="0.4"/>
-        <path d="M50,520 Q150,510 250,520 Q350,530 450,520 Q550,510 650,520 Q750,530 850,520" stroke="#2980b9" stroke-width="1.5" fill="none" opacity="0.25"/>
-      </svg>
-    </div>
-    <div class="hero-content">
-      <h1 id="heroTitle">You Are Not Alone.<br/>Help Is Here.</h1>
-      <p class="hero-sub" id="heroSub">Free resources for food, shelter, legal help, education, and citizenship — in your language, in your area. No names. No data. No fear.</p>
-      <div class="privacy-pill" id="privacyPill">🔒 Anonymous & Private · No Data Stored · No Tracking</div>
-    </div>
-  </section>
-
-  <!-- SEARCH SECTION -->
-  <section class="search-section" id="search-section">
-    <div class="search-card">
-      <h2 id="searchTitle">Find Resources Near You</h2>
-      <p class="search-note" id="searchNote">Enter only your zip code or region — we never ask for your name or address.</p>
-      <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search resources, services, or topics..." aria-label="Search resources" />
-        <button class="search-btn" onclick="performSearch()" id="searchBtn" aria-label="Search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </button>
-      </div>
-      <div class="location-row">
-        <input type="text" id="zipInput" placeholder="Zip code or city/region (optional)" aria-label="Zip code or region" maxlength="10" />
-        <select id="categorySelect" aria-label="Filter by category">
-          <option value="">All Categories</option>
-          <option value="food">🥗 Food</option>
-          <option value="shelter">🏠 Shelter</option>
-          <option value="legal">⚖️ Legal Aid</option>
-          <option value="education">📚 Education</option>
-          <option value="childcare">👶 Childcare</option>
-          <option value="rights">🛡️ Know Your Rights</option>
+    <nav class="top-nav">
+        <div class="logo">The Lighthouse</div>
+        <select id="languagePicker" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="zh">中文 (Chinese - Mandarin)</option>
+            <option value="ht">Kreyòl Ayisyen (Creole)</option>
         </select>
-      </div>
-      <div class="search-results" id="searchResults" aria-live="polite"></div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- RESOURCES GRID -->
-  <section class="resources-section" id="resources">
-    <div class="section-header">
-      <h2 id="resourcesTitle">Available Resources</h2>
-      <p id="resourcesSubtitle">Click any category to explore free services in your area.</p>
-    </div>
-    <div class="resources-grid">
+    <header class="hero">
+        <div class="hero-content">
+            <h1 id="welcome-title">You are safe here.</h1>
+            <p id="welcome-sub">Find local resources anonymously. No names, no tracking.</p>
+            
+            <div class="search-box">
+                <input type="text" id="locationInput" placeholder="Enter Zip Code or Region...">
+                <button onclick="searchResources()" id="search-btn">Find Help</button>
+            </div>
+        </div>
+    </header>
 
-      <!-- FOOD -->
-      <div class="resource-card" data-category="food" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false">
-        <div class="card-header">
-          <span class="card-icon">🥗</span>
-          <div>
-            <h3 id="foodTitle">Food Resources</h3>
-            <p class="card-desc" id="foodDesc">Food banks, pantries, free meals</p>
-          </div>
-          <span class="card-arrow">▾</span>
+    <main class="container">
+        <h2 id="category-title" class="section-title">What do you need help finding today?</h2>
+        <div class="grid">
+            <div class="card" onclick="showCategory('hotlines')">
+                <div class="card-icon">📞</div>
+                <h3 id="cat-hotlines">Emergency Hotlines</h3>
+            </div>
+            <div class="card" onclick="showCategory('food')">
+                <div class="card-icon">🍎</div>
+                <h3 id="cat-food">Food Resources</h3>
+            </div>
+            <div class="card" onclick="showCategory('shelter')">
+                <div class="card-icon">🏠</div>
+                <h3 id="cat-shelter">Shelter & Housing</h3>
+            </div>
+            <div class="card" onclick="showCategory('legal')">
+                <div class="card-icon">⚖️</div>
+                <h3 id="cat-legal">Legal & Advocacy</h3>
+            </div>
+            <div class="card" onclick="showCategory('education')">
+                <div class="card-icon">📚</div>
+                <h3 id="cat-edu">Education & ESL</h3>
+            </div>
+            <div class="card" onclick="showCategory('childcare')">
+                <div class="card-icon">🧸</div>
+                <h3 id="cat-child">Child Care</h3>
+            </div>
+            <div class="card" onclick="showCategory('employment')">
+                <div class="card-icon">💼</div>
+                <h3 id="cat-emp">Employment</h3>
+            </div>
+            <div class="card" onclick="showCategory('health')">
+                <div class="card-icon">🏥</div>
+                <h3 id="cat-health">Health</h3>
+            </div>
+            <div class="card rights-card" onclick="showCategory('rights')">
+                <div class="card-icon">✋</div>
+                <h3 id="cat-rights">Know Your Rights</h3>
+            </div>
         </div>
-        <div class="card-body">
-          <div class="resource-list" id="foodList">
-            <div class="resource-item">
-              <div class="ri-name">Feeding America Network</div>
-              <div class="ri-address">📍 Nationwide — <a href="https://www.feedingamerica.org/find-your-local-foodbank" target="_blank" rel="noopener noreferrer">Find local food bank →</a></div>
-              <div class="ri-hours" data-service="feedingamerica">⏰ Hours vary by location</div>
-              <div class="ri-note">No ID required at most locations</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">St. Vincent de Paul Society</div>
-              <div class="ri-address">📍 Local chapters nationwide — <a href="https://www.svdpusa.org/Find-Help" target="_blank" rel="noopener noreferrer">Find near you →</a></div>
-              <div class="ri-hours">⏰ Mon–Sat, hours vary</div>
-              <div class="ri-note">Free food assistance, no documentation required</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">WhyHunger Hotline</div>
-              <div class="ri-address">📞 <a href="tel:1-800-548-6479">1-800-548-6479</a></div>
-              <div class="ri-hours">⏰ Mon–Fri 9am–6pm ET</div>
-              <div class="ri-note">Multilingual support, free referral service</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">Food Pantries.org</div>
-              <div class="ri-address">📍 <a href="https://www.foodpantries.org" target="_blank" rel="noopener noreferrer">foodpantries.org</a></div>
-              <div class="ri-hours">⏰ Search by zip for local hours</div>
-              <div class="ri-note">Directory of 60,000+ local food pantries</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">SNAP Benefits (some states allow regardless of status)</div>
-              <div class="ri-address">📍 <a href="https://www.benefits.gov/benefit/361" target="_blank" rel="noopener noreferrer">benefits.gov →</a></div>
-              <div class="ri-hours">⏰ Apply online 24/7</div>
-              <div class="ri-note">Children born in the US may qualify regardless of parent's status</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    </main>
 
-      <!-- SHELTER -->
-      <div class="resource-card" data-category="shelter" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false">
-        <div class="card-header">
-          <span class="card-icon">🏠</span>
-          <div>
-            <h3 id="shelterTitle">Shelter & Housing</h3>
-            <p class="card-desc" id="shelterDesc">Emergency shelter, transitional housing</p>
-          </div>
-          <span class="card-arrow">▾</span>
-        </div>
-        <div class="card-body">
-          <div class="resource-list">
-            <div class="resource-item">
-              <div class="ri-name">National Domestic Violence Hotline</div>
-              <div class="ri-address">📞 <a href="tel:1-800-799-7233">1-800-799-7233</a> · Text START to 88788</div>
-              <div class="ri-hours">⏰ 24/7</div>
-              <div class="ri-note">Safe emergency housing referrals, multilingual</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">211 Helpline</div>
-              <div class="ri-address">📞 Dial <a href="tel:211">211</a> from any phone</div>
-              <div class="ri-hours">⏰ 24/7 in most states</div>
-              <div class="ri-note">Local shelter referrals, no documentation required to call</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">Catholic Charities USA</div>
-              <div class="ri-address">📍 <a href="https://www.catholiccharitiesusa.org/find-help/" target="_blank" rel="noopener noreferrer">Find local office →</a></div>
-              <div class="ri-hours">⏰ Mon–Fri, hours vary</div>
-              <div class="ri-note">Housing, emergency shelter — serves all regardless of faith or status</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">Salvation Army Emergency Shelter</div>
-              <div class="ri-address">📍 <a href="https://www.salvationarmyusa.org/usn/find-shelter/" target="_blank" rel="noopener noreferrer">Find local shelter →</a></div>
-              <div class="ri-hours">⏰ Varies by location</div>
-              <div class="ri-note">Emergency beds, meals, no ID required for crisis shelter</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">Migrant Farmworker Housing (USDA)</div>
-              <div class="ri-address">📍 <a href="https://www.rd.usda.gov/programs-services/multi-family-housing-programs/farm-labor-housing-direct-loans-grants" target="_blank" rel="noopener noreferrer">USDA Programs →</a></div>
-              <div class="ri-hours">⏰ Apply anytime</div>
-              <div class="ri-note">Safe housing specifically for farmworkers and their families</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <section id="resultsArea" class="hidden container">
+        <button class="back-btn" onclick="closeResults()">← <span id="back-text">Back to categories</span></button>
+        <div id="resultsContent"></div>
+    </section>
 
-      <!-- LEGAL -->
-      <div class="resource-card" data-category="legal" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false">
-        <div class="card-header">
-          <span class="card-icon">⚖️</span>
-          <div>
-            <h3 id="legalTitle">Legal Aid & Immigration</h3>
-            <p class="card-desc" id="legalDesc">Free legal help, citizenship, asylum</p>
-          </div>
-          <span class="card-arrow">▾</span>
-        </div>
-        <div class="card-body">
-          <div class="resource-list">
-            <div class="resource-item">
-              <div class="ri-name">CLINIC — Catholic Legal Immigration Network</div>
-              <div class="ri-address">📍 <a href="https://cliniclegal.org/find-legal-help" target="_blank" rel="noopener noreferrer">Find accredited rep →</a></div>
-              <div class="ri-hours">⏰ Mon–Fri, hours vary</div>
-              <div class="ri-note">Free/low-cost immigration legal services nationwide</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">RAICES (Refugee and Immigrant Center)</div>
-              <div class="ri-address">📍 <a href="https://www.raicestexas.org/get-help/" target="_blank" rel="noopener noreferrer">raicestexas.org</a></div>
-              <div class="ri-hours">⏰ Mon–Fri 8am–5pm CT</div>
-              <div class="ri-note">Free legal representation for detained immigrants and families</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">National Immigration Law Center</div>
-              <div class="ri-address">📍 <a href="https://www.nilc.org" target="_blank" rel="noopener noreferrer">nilc.org</a></div>
-              <div class="ri-hours">⏰ Mon–Fri 9am–5pm PT</div>
-              <div class="ri-note">Policy advocacy and referrals to free legal help</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">Immigration Advocates Network</div>
-              <div class="ri-address">📍 <a href="https://www.immigrationadvocates.org/nonprofit/legaldirectory/" target="_blank" rel="noopener noreferrer">Find legal aid →</a></div>
-              <div class="ri-hours">⏰ Search by zip/state</div>
-              <div class="ri-note">Free legal aid directory searchable by state</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">USCIS Free Resources & Forms</div>
-              <div class="ri-address">📍 <a href="https://www.uscis.gov/forms/filing-fees/additional-information-on-filing-a-fee-waiver" target="_blank" rel="noopener noreferrer">uscis.gov — fee waivers →</a></div>
-              <div class="ri-hours">⏰ Online 24/7</div>
-              <div class="ri-note">Official forms, instructions, and fee waiver requests</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- EDUCATION -->
-      <div class="resource-card" data-category="education" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false">
-        <div class="card-header">
-          <span class="card-icon">📚</span>
-          <div>
-            <h3 id="educationTitle">Education</h3>
-            <p class="card-desc" id="educationDesc">Schools, ESL, adult learning, scholarships</p>
-          </div>
-          <span class="card-arrow">▾</span>
-        </div>
-        <div class="card-body">
-          <div class="resource-list">
-            <div class="resource-item">
-              <div class="ri-name">K–12 Education (Plyler v. Doe)</div>
-              <div class="ri-address">📍 Your local public school district</div>
-              <div class="ri-hours">⏰ Enrollment year-round</div>
-              <div class="ri-note">All children have the right to free public K–12 education regardless of immigration status — <em>this is federal law</em></div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">ProLiteracy — Adult ESL Programs</div>
-              <div class="ri-address">📍 <a href="https://proliteracy.org/find-a-member-program/" target="_blank" rel="noopener noreferrer">Find local program →</a></div>
-              <div class="ri-hours">⏰ Varies by program</div>
-              <div class="ri-note">Free adult literacy and English programs nationwide</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">TheDream.US Scholarship</div>
-              <div class="ri-address">📍 <a href="https://www.thedream.us/scholarships/" target="_blank" rel="noopener noreferrer">thedream.us</a></div>
-              <div class="ri-hours">⏰ Annual application cycle</div>
-              <div class="ri-note">Scholarships for DREAMers and TPS holders for college</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">GED Free Study Materials</div>
-              <div class="ri-address">📍 <a href="https://ged.com/study/" target="_blank" rel="noopener noreferrer">ged.com</a></div>
-              <div class="ri-hours">⏰ Online 24/7</div>
-              <div class="ri-note">Free study resources to earn a high school equivalency</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">National Immigration Forum — Education Resources</div>
-              <div class="ri-address">📍 <a href="https://immigrationforum.org/article/daca-and-education/" target="_blank" rel="noopener noreferrer">immigrationforum.org →</a></div>
-              <div class="ri-hours">⏰ Online 24/7</div>
-              <div class="ri-note">Guides on accessing education at every level</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CHILDCARE -->
-      <div class="resource-card" data-category="childcare" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false">
-        <div class="card-header">
-          <span class="card-icon">👶</span>
-          <div>
-            <h3 id="childcareTitle">Childcare & Family</h3>
-            <p class="card-desc" id="childcareDesc">Childcare, health, WIC, family services</p>
-          </div>
-          <span class="card-arrow">▾</span>
-        </div>
-        <div class="card-body">
-          <div class="resource-list">
-            <div class="resource-item">
-              <div class="ri-name">WIC (Women, Infants & Children)</div>
-              <div class="ri-address">📍 <a href="https://www.fns.usda.gov/wic/wic-local-agency-contacts" target="_blank" rel="noopener noreferrer">Find local WIC office →</a></div>
-              <div class="ri-hours">⏰ Mon–Fri, hours vary</div>
-              <div class="ri-note">Free food, nutrition, and healthcare referrals for children under 5 and pregnant women. U.S.-born children qualify regardless of parents' status.</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">Head Start / Early Head Start</div>
-              <div class="ri-address">📍 <a href="https://www.acf.hhs.gov/ohs/about/head-start" target="_blank" rel="noopener noreferrer">Find local program →</a></div>
-              <div class="ri-hours">⏰ Enrollment varies by location</div>
-              <div class="ri-note">Free early childhood education for low-income families</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">Medicaid / CHIP (Children's Health)</div>
-              <div class="ri-address">📍 <a href="https://www.medicaid.gov/about-us/contact-us/contact-your-state-medicaid-agency/index.html" target="_blank" rel="noopener noreferrer">Find your state →</a></div>
-              <div class="ri-hours">⏰ Apply anytime</div>
-              <div class="ri-note">U.S.-born children and certain humanitarian statuses may qualify for free health coverage</div>
-            </div>
-            <div class="resource-item">
-              <div class="ri-name">Child Welfare Information Gateway</div>
-              <div class="ri-address">📍 <a href="https://www.childwelfare.gov" target="_blank" rel="noopener noreferrer">childwelfare.gov</a></div>
-              <div class="ri-hours">⏰ Online 24/7</div>
-              <div class="ri-note">Resources to protect children and keep families together</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- KNOW YOUR RIGHTS -->
-      <div class="resource-card rights-card" data-category="rights" onclick="toggleCard(this)" tabindex="0" role="button" aria-expanded="false" id="rights">
-        <div class="card-header">
-          <span class="card-icon">🛡️</span>
-          <div>
-            <h3 id="rightsTitle">Know Your Rights</h3>
-            <p class="card-desc" id="rightsDesc">Your rights with immigration officers — in many languages</p>
-          </div>
-          <span class="card-arrow">▾</span>
-        </div>
-        <div class="card-body">
-          <div class="rights-lang-selector">
-            <p id="rightsLangLabel">Select your language / Seleccione su idioma:</p>
-            <div class="rights-lang-btns">
-              <button class="rl-btn active" onclick="showRights('en', this)">English</button>
-              <button class="rl-btn" onclick="showRights('es', this)">Español</button>
-              <button class="rl-btn" onclick="showRights('fr', this)">Français</button>
-              <button class="rl-btn" onclick="showRights('zh', this)">中文</button>
-              <button class="rl-btn" onclick="showRights('ht', this)">Kreyòl</button>
-              <button class="rl-btn" onclick="showRights('pt', this)">Português</button>
-              <button class="rl-btn" onclick="showRights('ar', this)">العربية</button>
-              <button class="rl-btn" onclick="showRights('vi', this)">Tiếng Việt</button>
-            </div>
-          </div>
-          <div class="rights-content" id="rightsContent">
-            <!-- Populated by JS -->
-          </div>
-          <div class="rights-download">
-            <p id="rightsDownloadLabel">Download printable rights card (no internet needed):</p>
-            <div class="download-btns">
-              <a href="https://www.aclu.org/know-your-rights/immigrants-rights" target="_blank" rel="noopener noreferrer" class="dl-btn">ACLU Rights Card →</a>
-              <a href="https://nilc.org/get-involved/community-education-resources/know-your-rights/" target="_blank" rel="noopener noreferrer" class="dl-btn">NILC Know Your Rights →</a>
-              <a href="https://www.immigrantdefenseproject.org/know-your-rights/" target="_blank" rel="noopener noreferrer" class="dl-btn">Immigrant Defense →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end resources-grid -->
-  </section>
-
-  <!-- PRIVACY PLEDGE SECTION -->
-  <section class="privacy-section">
-    <div class="privacy-inner">
-      <div class="privacy-icon">🔐</div>
-      <h2 id="privacyTitle">Our Privacy Promise</h2>
-      <div class="privacy-grid">
-        <div class="pp-item">
-          <span>🚫</span>
-          <p id="pp1">We do not collect your name, address, or phone number.</p>
-        </div>
-        <div class="pp-item">
-          <span>🚫</span>
-          <p id="pp2">We do not store IP addresses or location data.</p>
-        </div>
-        <div class="pp-item">
-          <span>🚫</span>
-          <p id="pp3">We do not use cookies or tracking tools.</p>
-        </div>
-        <div class="pp-item">
-          <span>🚫</span>
-          <p id="pp4">We never sell or share your information — ever.</p>
-        </div>
-        <div class="pp-item">
-          <span>✅</span>
-          <p id="pp5">This site is anonymous by design. Use it freely and safely.</p>
-        </div>
-        <div class="pp-item">
-          <span>✅</span>
-          <p id="pp6">For extra privacy, use the Tor Browser or a VPN.</p>
-        </div>
-      </div>
-      <p class="privacy-footer-note" id="privacyFooterNote">Nos no recopilamos, almacenamos, ni compartimos ninguna información personal. · Nou pa kolekte, pa estoke, ni pataje okenn enfòmasyon pèsonèl. · 我们不收集、存储或共享任何个人信息。</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-col">
-        <h4>🏮 The Lighthouse</h4>
-        <p id="footerDesc">A safe, anonymous resource hub. No login. No data. Just help.</p>
-      </div>
-      <div class="footer-col">
-        <h4 id="footerLinksTitle">Quick Links</h4>
-        <a href="#resources">Resources</a>
-        <a href="#rights">Know Your Rights</a>
-        <a href="#search-section">Find Near Me</a>
-      </div>
-      <div class="footer-col">
-        <h4 id="footerHotlinesTitle">Emergency Hotlines</h4>
-        <a href="tel:211">211 — Local Help</a>
-        <a href="tel:1-800-799-7233">1-800-799-7233 — Domestic Violence</a>
-        <a href="tel:1-800-548-6479">1-800-548-6479 — Hunger Hotline</a>
-      </div>
-      <div class="footer-col">
-        <h4 id="footerPrivacyTitle">Privacy & Security</h4>
-        <p id="footerPrivacyText">This site uses no analytics, no cookies, no login. Zero data collected. Recommend: use <a href="https://www.torproject.org" target="_blank" rel="noopener noreferrer">Tor Browser</a> for full anonymity.</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p id="footerBottom">The Lighthouse is a free public resource. Not affiliated with any government agency. Information is provided for educational purposes only. Always consult a qualified immigration attorney for legal advice.</p>
-    </div>
-  </footer>
-
-  <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
