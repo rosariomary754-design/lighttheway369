@@ -1,10 +1,10 @@
 :root {
-    --bg-color: #FDFBF7; 
-    --text-main: #4A4A4A; 
-    --primary-blue: #4A90E2; 
+    --bg-color: #FDFBF7; /* Soft sand */
+    --text-main: #4A4A4A; /* Soft dark grey, less harsh than black */
+    --primary-blue: #4A90E2; /* Friendly, approachable blue */
     --warm-gold: #F5A623;
     --card-bg: #FFFFFF;
-    --rights-bg: #FFF3E0; 
+    --rights-bg: #FFF3E0; /* Gentle highlight for the rights card */
 }
 
 * {
@@ -52,9 +52,8 @@ select {
 }
 
 .hero {
-    /* Updated to use your local lighthouse image. 
-       Adjusted the gradient to be darker so the white text remains readable over your specific image. */
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('lighthouse.jpg') center/cover;
+    /* Kept the linear-gradient for text readability */
+    background: linear-gradient(rgba(74, 144, 226, 0.85), rgba(74, 144, 226, 0.7)), url('hero_lighthouse.jpg') center/cover;
     color: white;
     text-align: center;
     padding: 80px 20px;
@@ -153,21 +152,23 @@ select {
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* New style for the external resource links */
-.resource-link {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 15px;
-    background-color: var(--primary-blue);
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: background 0.2s;
-}
-
-.resource-link:hover {
-    background-color: #357ABD;
-}
-
+.status-open { color: #2E7D32; font-weight: bold; }
 .safe-note { color: var(--warm-gold); font-size: 0.9rem; font-style: italic; }
+
+/* !!! ADDED THESE STYLES !!! */
+/* Container to help position and center the image */
+.main-lighthouse-image-container {
+    max-width: 1000px; /* Aligns with the container class width */
+    margin: 40px auto 0; /* Centered, 40px top margin, 0px bottom margin (closer to categories) */
+    padding: 0 20px; /* Matches the container padding */
+    display: flex; /* Helps center the image */
+    justify-content: center; /* Horizontally centers the image */
+}
+
+/* Styles the actual image */
+.main-lighthouse-image {
+    max-width: 100%; /* Image can't be wider than the container */
+    height: auto; /* Maintains the image's aspect ratio */
+    border-radius: 15px; /* Matches card border-radius for consistency */
+    display: block; /* Removes weird bottom spacing */
+}
