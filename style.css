@@ -52,6 +52,7 @@ select {
 }
 
 .hero {
+    /* Kept the warm-blue gradient for header text readability */
     background: linear-gradient(rgba(74, 144, 226, 0.9), rgba(74, 144, 226, 0.9));
     color: white;
     text-align: center;
@@ -76,3 +77,106 @@ select {
     border: none;
     padding: 15px 20px;
     font-size: 1rem;
+    border-radius: 30px;
+    outline: none;
+}
+
+.search-box button {
+    background: var(--warm-gold);
+    color: white;
+    border: none;
+    padding: 0 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-box button:hover { background: #e09612; }
+
+/* Image Container Styles */
+.main-lighthouse-image-container {
+    max-width: 1000px;
+    margin: 40px auto 0;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.main-lighthouse-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: block;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-title { text-align: center; color: var(--primary-blue); margin-bottom: 30px; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    border: 1px solid #eee;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+}
+
+.rights-card {
+    background: var(--rights-bg);
+    border-color: #FFE0B2;
+}
+
+.card-icon { font-size: 3rem; margin-bottom: 15px; }
+
+.hidden { display: none; }
+
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--primary-blue);
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.resource-item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--primary-blue);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.resource-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.resource-link:hover {
+    text-decoration: underline;
+}
