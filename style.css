@@ -1,6 +1,6 @@
 :root {
     --bg-color: #FDFBF7; /* Soft sand */
-    --text-main: #4A4A4A; /* Soft dark grey, less harsh than black */
+    --text-main: #4A4A4A; /* Soft dark grey */
     --primary-blue: #4A90E2; /* Friendly, approachable blue */
     --warm-gold: #F5A623;
     --card-bg: #FFFFFF;
@@ -52,8 +52,12 @@ select {
 }
 
 .hero {
-    /* Kept the linear-gradient for text readability */
-    background: linear-gradient(rgba(74, 144, 226, 0.85), rgba(74, 144, 226, 0.7)), url('hero_lighthouse.jpg') center/cover;
+    /* * UPDATED to use your local image.
+     * The image is 'hero_lighthouse.jpg' and it will be placed in the same folder.
+     * The warm-blue overlay (linear-gradient) is kept for style and readability.
+     */
+    background: linear-gradient(rgba(74, 144, 226, 0.85), rgba(74, 144, 226, 0.7)), 
+                url('hero_lighthouse.jpg') center/cover;
     color: white;
     text-align: center;
     padding: 80px 20px;
@@ -154,21 +158,3 @@ select {
 
 .status-open { color: #2E7D32; font-weight: bold; }
 .safe-note { color: var(--warm-gold); font-size: 0.9rem; font-style: italic; }
-
-/* !!! ADDED THESE STYLES !!! */
-/* Container to help position and center the image */
-.main-lighthouse-image-container {
-    max-width: 1000px; /* Aligns with the container class width */
-    margin: 40px auto 0; /* Centered, 40px top margin, 0px bottom margin (closer to categories) */
-    padding: 0 20px; /* Matches the container padding */
-    display: flex; /* Helps center the image */
-    justify-content: center; /* Horizontally centers the image */
-}
-
-/* Styles the actual image */
-.main-lighthouse-image {
-    max-width: 100%; /* Image can't be wider than the container */
-    height: auto; /* Maintains the image's aspect ratio */
-    border-radius: 15px; /* Matches card border-radius for consistency */
-    display: block; /* Removes weird bottom spacing */
-}
