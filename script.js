@@ -176,8 +176,9 @@ function searchResources() {
 function getDeviceLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
-            const userLat = 40°45'19.80.latitude;
-            const userLon = 73°58'26.04.longitude;
+            // This pulls the live coordinates from the user's device
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
             
             // Now trigger the search using these coordinates
             filterByProximity(userLat, userLon);
@@ -187,68 +188,65 @@ function getDeviceLocation() {
         });
     }
 }
-function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 3959; // Radius of Earth in miles
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
-}
+// --- 2. Local Database (Updated with coordinates) ---
 const resourceDatabase = [
-    { category: 'food', name: 'Community Pantry', lat: 40.7128, lng: -74.0060, ... },
-    // Add coordinates for each item
+    // Emergency Hotlines
+    { category: 'hotlines', name: '211 Network', desc: 'Housing, food, and utilities assistance', url: 'https://www.211.org/' },
+    { category: 'hotlines', name: 'National Domestic Hotline', desc: 'Confidential support for domestic violence', url: 'https://www.thehotline.org/' },
+    { category: 'hotlines', name: 'WhyHunger', desc: 'Emergency food resource database', url: 'https://whyhunger.org/' },
+    { category: 'hotlines', name: 'National Hunger Hotline', desc: 'Emergency food support via phone', url: 'https://help.sengov.com/posts/national-hunger-hotline' },
+
+    // Know Your Rights
+    { category: 'rights', name: 'ACLU: Immigrants\' Rights', desc: 'Learn your rights and what to do in various situations.', url: 'https://www.aclu.org/know-your-rights/immigrants-rights' },
+    { category: 'rights', name: 'NILC: Know Your Rights', desc: 'Resources for navigating interactions with law enforcement.', url: 'https://www.nilc.org/resources/?resource_type%5B%5D=know-your-rights' },
+    { category: 'rights', name: 'Immigrant Defense Project', desc: 'What to do if ICE is at your door.', url: 'https://www.immigrantdefenseproject.org/know-your-rights-with-ice/' },
+
+    // Food Banks
+    { category: 'food', name: 'Feeding America', desc: 'Find your local foodbank', url: 'https://www.feedingamerica.org/find-your-local-foodbank' },
+    { category: 'food', name: 'Society of St. Vincent de Paul', desc: 'Food pantries and community support', url: 'https://ssvpusa.org/' },
+    { category: 'food', name: 'FoodPantries.org', desc: 'Directory of local food pantries', url: 'https://www.foodpantries.org/' },
+    { category: 'food', name: 'USA.gov Food Stamps', desc: 'Information on nutritional assistance programs', url: 'https://www.usa.gov/food-stamps' },
+    { category: 'food', name: 'USDA Food and Nutrition Service', desc: 'Federal food and nutrition resources', url: 'https://www.fns.usda.gov/' },
+    { category: 'food', name: 'Community Pantry', desc: 'Local food support', url: '#', lat: 40.7128, lng: -74.0060 }, // Coordinate example
+
+    // Find Shelter
+    { category: 'shelter', name: 'Catholic Charities USA', desc: 'Find a local agency for emergency housing', url: 'https://www.catholiccharitiesusa.org/about-us/find-a-local-agency/' },
+    { category: 'shelter', name: 'The Salvation Army', desc: 'Locate emergency shelters and housing support', url: 'https://www.salvationarmyusa.org/usn/find-shelter/' },
+    { category: 'shelter', name: 'USDA Farm Labor Housing', desc: 'Multifamily housing programs and grants', url: 'https://www.rd.usda.gov/programs-services/multifamily-housing-programs/farm-labor-housing-direct-loans-grants' },
+
+    // Legal Help (National)
+    { category: 'legal', name: 'CLINIC', desc: 'Find affordable legal help', url: 'https://www.cliniclegal.org/find-legal-help' },
+    { category: 'legal', name: 'RAICES Texas', desc: 'Legal and advocacy services', url: 'https://raicestexas.org/get-help/' },
+    { category: 'legal', name: 'National Immigration Law Center (NILC)', desc: 'Defending and advancing rights of low-income immigrants', url: 'https://www.nilc.org/' },
+    { category: 'legal', name: 'Immigration Advocates Network', desc: 'National immigration legal services directory', url: 'https://www.immigrationadvocates.org/nonprofit/legaldirectory/' },
+    { category: 'legal', name: 'USCIS Fee Waiver Info', desc: 'Information on filing for fee waivers', url: 'https://www.uscis.gov/forms/filing-fees/additional-information-on-filing-a-fee-waiver' },
+    
+    // Legal Help (Local with coordinates)
+    { category: 'legal', name: 'Legal Services Area 1', desc: 'Local legal advocacy', url: '#', lat: 40.7166, lng: -74.0044 },
+    { category: 'legal', name: 'Legal Services Area 2', desc: 'Local legal advocacy', url: '#', lat: 40.7061, lng: -74.0061 },
+    { category: 'legal', name: 'Legal Services Area 3', desc: 'Local legal advocacy', url: '#', lat: 40.6923, lng: -73.9912 },
+    { category: 'legal', name: 'Legal Services Area 4', desc: 'Local legal advocacy', url: '#', lat: 40.8354, lng: -73.9168 },
+    { category: 'legal', name: 'Legal Services Area 5', desc: 'Local legal advocacy', url: '#', lat: 40.7599, lng: -73.8296 },
+    { category: 'legal', name: 'Legal Services Area 6', desc: 'Local legal advocacy', url: '#', lat: 40.6355, lng: -74.1352 },
+    { category: 'legal', name: 'Legal Services Area 7', desc: 'Local legal advocacy', url: '#', lat: 40.74987, lng: -73.98975 },
+    { category: 'legal', name: 'Legal Services Area 8', desc: 'Local legal advocacy', url: '#', lat: 40.7547, lng: -73.9904 },
+    { category: 'legal', name: 'Legal Services Area 9', desc: 'Local legal advocacy', url: '#', lat: 40.8039, lng: -73.9549 },
+
+    // Education
+    { category: 'education', name: 'ProLiteracy', desc: 'Adult literacy and education resources', url: 'https://www.proliteracy.org/' },
+    { category: 'education', name: 'TheDream.US', desc: 'Scholarships for undocumented students', url: 'https://www.thedream.us/scholarships/' },
+    { category: 'education', name: 'GED Classes', desc: 'Find local study programs for the GED', url: 'https://www.ged.com/study/ged-classes.html' },
+
+    // Employment
+    { category: 'employment', name: 'Forum Together', desc: 'Community and opportunity boards', url: 'https://forumtogether.org/' },
+
+    // Childcare
+    { category: 'childcare', name: 'Head Start', desc: 'Early childhood education and family support', url: 'https://acf.gov/ohs/about/head-start' },
+    { category: 'childcare', name: 'Child Welfare Information Gateway', desc: 'Resources for child safety and care', url: 'https://www.childwelfare.gov/' },
+
+    // Health
+    { category: 'health', name: 'Medicaid', desc: 'Healthcare coverage information', url: 'https://www.medicaid.gov/' }
 ];
-const resourceDatabase = [
-    { category: 'legal advocacy', name: 'Legal Services', lat: 40.7166, lng: -74.0044, ... },
-    // Add coordinates for each item
-    ];
-const resourceDatabase = [
-    { category: 'legal advocacy', name: 'Legal Services', lat: 40.7061, -74.0061, ... },
-     // Add coordinates for each item
-    ];
-const resourceDatabase = [
-    { category: 'legal advocacy', name: 'Legal Services', lat: 40.6923, -73.9912, ... },
-     // Add coordinates for each item
-    ];
-const resourceDatabase = [
-    { category: 'legal advocacy', name: 'Legal Services', lat: 40.8354, -73.9168, ... },
-     // Add coordinates for each item
-    ];
-const resourceDatabase = [
-    { category: 'legal advocacy', name: 'Legal Services', lat: 40.7599, -73.8296, ... },
-     // Add coordinates for each item
-    ];
-const resourceDatabase = [
-    { category: 'legal advocacy', name: 'Legal Services', lat: 40.6355, -74.1352, ... },
-     // Add coordinates for each item
-    ];
-const resourceDatabase = [
-    { category: 'legal advocacy', name: 'Legal Services', lat: 40.74987, -73.98975, ... },
-     // Add coordinates for each item
-    ];
-const resourceDatabase = [
-    { category: 'legal advocacy', name: 'Legal Services', lat: 40.7547 -73.9904, ... },
-     // Add coordinates for each item
-    ];
-const resourceDatabase = [
-    { category: 'legal advocacy', name: 'Legal Services', lat: 40.8039, -73.9549, ... },
-     // Add coordinates for each item
-    ];
-
-function filterByProximity(userLat, userLon) {
-    const radiusInMiles = 10; // Your preferred "nearby" range
-
-    const nearbyResources = resourceDatabase.filter(item => {
-        if (!item.lat || !item.lng) return false;
-        const distance = calculateDistance(userLat, userLon, item.lat, item.lng);
-        return distance <= radiusInMiles;
-    });
-
-    displayResults(nearbyResources, "Resources near your location");
-}
 
 function showCategory(cat) {
     let filtered = resourceDatabase.filter(item => item.category === cat);
