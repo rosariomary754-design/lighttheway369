@@ -193,6 +193,25 @@ function filterByProximity(userLat, userLon) {
 
     displayResults(nearbyResources, "Local Resources near you");
 }
+
+const zipCodeMap = {
+    "10001": { lat: 40.7501, lng: -73.9996 },
+    "10002": { lat: 40.7150, lng: -73.9843 },
+    // Add the specific zip codes for your resource areas here
+};
+
+function searchResources() {
+    const zip = document.getElementById('locationInput').value.trim();
+    if(!zip) return;
+
+    if (zipCodeMap[zip]) {
+        const coords = zipCodeMap[zip];
+        filterByProximity(coords.lat, coords.lng);
+    } else {
+        // Fallback: If zip isn't in our local list, show everything or an error
+        displayResults(resourceDatabase, `Showing all resources for ${zip}`);
+    }
+}
 // --- 2. Local Database (Updated with coordinates) ---
 const resourceDatabase = [
     // Emergency Hotlines
