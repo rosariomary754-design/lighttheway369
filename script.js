@@ -113,6 +113,12 @@ function searchResources() {
     // We just show a simulated local filter based on the database above.
     displayResults(resourceDatabase, `Results near ${zip}`);
 }
+navigator.geolocation.getCurrentPosition(position => {
+    let lat = 40°45'19.80".latitude;
+    let lon = 73°58'26.04".longitude;
+
+    console.log(lat, lon);
+ });
 
 function showCategory(cat) {
     let filtered = resourceDatabase.filter(item => item.category === cat);
