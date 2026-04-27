@@ -116,54 +116,6 @@ function changeLanguage() {
     document.getElementById('back-text').innerText = t.back;
 }
 
-// --- 2. Local Database (Updated with provided links) ---
-const resourceDatabase = [
-    // Emergency Hotlines
-    { category: 'hotlines', name: '211 Network', desc: 'Housing, food, and utilities assistance', url: 'https://www.211.org/' },
-    { category: 'hotlines', name: 'National Domestic Hotline', desc: 'Confidential support for domestic violence', url: 'https://www.thehotline.org/' },
-    { category: 'hotlines', name: 'WhyHunger', desc: 'Emergency food resource database', url: 'https://whyhunger.org/' },
-    { category: 'hotlines', name: 'National Hunger Hotline', desc: 'Emergency food support via phone', url: 'https://help.sengov.com/posts/national-hunger-hotline' },
-
-    // Know Your Rights
-    { category: 'rights', name: 'ACLU: Immigrants\' Rights', desc: 'Learn your rights and what to do in various situations.', url: 'https://www.aclu.org/know-your-rights/immigrants-rights' },
-    { category: 'rights', name: 'NILC: Know Your Rights', desc: 'Resources for navigating interactions with law enforcement.', url: 'https://www.nilc.org/resources/?resource_type%5B%5D=know-your-rights' },
-    { category: 'rights', name: 'Immigrant Defense Project', desc: 'What to do if ICE is at your door.', url: 'https://www.immigrantdefenseproject.org/know-your-rights-with-ice/' },
-
-    // Food Banks
-    { category: 'food', name: 'Feeding America', desc: 'Find your local foodbank', url: 'https://www.feedingamerica.org/find-your-local-foodbank' },
-    { category: 'food', name: 'Society of St. Vincent de Paul', desc: 'Food pantries and community support', url: 'https://ssvpusa.org/' },
-    { category: 'food', name: 'FoodPantries.org', desc: 'Directory of local food pantries', url: 'https://www.foodpantries.org/' },
-    { category: 'food', name: 'USA.gov Food Stamps', desc: 'Information on nutritional assistance programs', url: 'https://www.usa.gov/food-stamps' },
-    { category: 'food', name: 'USDA Food and Nutrition Service', desc: 'Federal food and nutrition resources', url: 'https://www.fns.usda.gov/' },
-
-    // Find Shelter
-    { category: 'shelter', name: 'Catholic Charities USA', desc: 'Find a local agency for emergency housing', url: 'https://www.catholiccharitiesusa.org/about-us/find-a-local-agency/' },
-    { category: 'shelter', name: 'The Salvation Army', desc: 'Locate emergency shelters and housing support', url: 'https://www.salvationarmyusa.org/usn/find-shelter/' },
-    { category: 'shelter', name: 'USDA Farm Labor Housing', desc: 'Multifamily housing programs and grants', url: 'https://www.rd.usda.gov/programs-services/multifamily-housing-programs/farm-labor-housing-direct-loans-grants' },
-
-    // Legal Help
-    { category: 'legal', name: 'CLINIC', desc: 'Find affordable legal help', url: 'https://www.cliniclegal.org/find-legal-help' },
-    { category: 'legal', name: 'RAICES Texas', desc: 'Legal and advocacy services', url: 'https://raicestexas.org/get-help/' },
-    { category: 'legal', name: 'National Immigration Law Center (NILC)', desc: 'Defending and advancing rights of low-income immigrants', url: 'https://www.nilc.org/' },
-    { category: 'legal', name: 'Immigration Advocates Network', desc: 'National immigration legal services directory', url: 'https://www.immigrationadvocates.org/nonprofit/legaldirectory/' },
-    { category: 'legal', name: 'USCIS Fee Waiver Info', desc: 'Information on filing for fee waivers', url: 'https://www.uscis.gov/forms/filing-fees/additional-information-on-filing-a-fee-waiver' },
-
-    // Education
-    { category: 'education', name: 'ProLiteracy', desc: 'Adult literacy and education resources', url: 'https://www.proliteracy.org/' },
-    { category: 'education', name: 'TheDream.US', desc: 'Scholarships for undocumented students', url: 'https://www.thedream.us/scholarships/' },
-    { category: 'education', name: 'GED Classes', desc: 'Find local study programs for the GED', url: 'https://www.ged.com/study/ged-classes.html' },
-
-    // Employment
-    { category: 'employment', name: 'Forum Together', desc: 'Community and opportunity boards', url: 'https://forumtogether.org/' },
-
-    // Childcare
-    { category: 'childcare', name: 'Head Start', desc: 'Early childhood education and family support', url: 'https://acf.gov/ohs/about/head-start' },
-    { category: 'childcare', name: 'Child Welfare Information Gateway', desc: 'Resources for child safety and care', url: 'https://www.childwelfare.gov/' },
-
-    // Health
-    { category: 'health', name: 'Medicaid', desc: 'Healthcare coverage information', url: 'https://www.medicaid.gov/' }
-];
-
 // --- 3. UI Functionality ---
 function searchResources() {
     const zip = document.getElementById('locationInput').value;
