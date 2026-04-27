@@ -54,7 +54,7 @@ select {
 .hero {
     /* Updated to use your local lighthouse image. 
        Adjusted the gradient to be darker so the white text remains readable over your specific image. */
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('lighthouse.jpg') center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('assets/lighthouse.jpg') center/cover;
     color: white;
     text-align: center;
     padding: 80px 20px;
