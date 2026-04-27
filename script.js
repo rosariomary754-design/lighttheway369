@@ -116,6 +116,36 @@ function changeLanguage() {
     document.getElementById('back-text').innerText = t.back;
 }
 
+
+// --- 4. Geographic Calculations ---
+
+// The Haversine formula calculates the distance between two points on a sphere
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 3959; // Radius of the Earth in miles
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Returns distance in miles
+}
+
+function filterByProximity(userLat, userLon) {
+    const maxRadius = 15; // Resources within 15 miles
+    
+    const nearby = resourceDatabase.filter(item => {
+        // Skip items that don't have coordinates (like national hotlines)
+        if (!item.lat || !item.lng) return false;
+        
+        const dist = calculateDistance(userLat, userLon, item.lat, item.lng);
+        return dist <= maxRadius;
+    });
+
+    displayResults(nearby, `Local Resources within ${maxRadius} miles`);
+}
+
+
 // --- 3. UI Functionality ---
 function searchResources() {
     const zip = document.getElementById('locationInput').value;
