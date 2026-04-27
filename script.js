@@ -173,6 +173,70 @@ function searchResources() {
     // but the UI gives the user a personalized feel.
     displayResults(resourceDatabase, `National Resources available for ${zip}`);
 }
+function getDeviceLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const userLat = 40°45'19.80.latitude;
+            const userLon = 73°58'26.04.longitude;
+            
+            // Now trigger the search using these coordinates
+            filterByProximity(userLat, userLon);
+        }, error => {
+            console.error("Error getting location:", error);
+            alert("Could not determine location. Please enter a zip code manually.");
+        });
+    }
+}
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 3959; // Radius of Earth in miles
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+const resourceDatabase = [
+    { category: 'food', name: 'Community Pantry', lat: 40.7128, lng: -74.0060, ... },
+    // Add coordinates for each item
+];
+const resourceDatabase = [
+    { category: 'legal advocacy', name: 'Legal Services', lat: 40.7166, lng: -74.0044, ... },
+    // Add coordinates for each item
+    ];
+const resourceDatabase = [
+    { category: 'legal advocacy', name: 'Legal Services', lat: 40.7061, -74.0061, ... },
+     // Add coordinates for each item
+    ];
+const resourceDatabase = [
+    { category: 'legal advocacy', name: 'Legal Services', lat: 40.6923, -73.9912, ... },
+     // Add coordinates for each item
+    ];
+const resourceDatabase = [
+    { category: 'legal advocacy', name: 'Legal Services', lat: 40.8354, -73.9168, ... },
+     // Add coordinates for each item
+    ];
+const resourceDatabase = [
+    { category: 'legal advocacy', name: 'Legal Services', lat: 40.7599, -73.8296, ... },
+     // Add coordinates for each item
+    ];
+const resourceDatabase = [
+    { category: 'legal advocacy', name: 'Legal Services', lat: 40.6355, -74.1352, ... },
+     // Add coordinates for each item
+    ];
+const resourceDatabase = [
+    { category: 'legal advocacy', name: 'Legal Services', lat: 40.74987, -73.98975, ... },
+     // Add coordinates for each item
+    ];
+const resourceDatabase = [
+    { category: 'legal advocacy', name: 'Legal Services', lat: 40.7547 -73.9904, ... },
+     // Add coordinates for each item
+    ];
+const resourceDatabase = [
+    { category: 'legal advocacy', name: 'Legal Services', lat: 40.8039, -73.9549, ... },
+     // Add coordinates for each item
+    ];
 
 function showCategory(cat) {
     let filtered = resourceDatabase.filter(item => item.category === cat);
