@@ -238,6 +238,18 @@ const resourceDatabase = [
      // Add coordinates for each item
     ];
 
+function filterByProximity(userLat, userLon) {
+    const radiusInMiles = 10; // Your preferred "nearby" range
+
+    const nearbyResources = resourceDatabase.filter(item => {
+        if (!item.lat || !item.lng) return false;
+        const distance = calculateDistance(userLat, userLon, item.lat, item.lng);
+        return distance <= radiusInMiles;
+    });
+
+    displayResults(nearbyResources, "Resources near your location");
+}
+
 function showCategory(cat) {
     let filtered = resourceDatabase.filter(item => item.category === cat);
     if(cat === 'rights') {
